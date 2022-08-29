@@ -25,10 +25,9 @@ function NavigationBar() {
             <NavLink to="login">
                 <h4>Account Login</h4>
             </NavLink>
-            </div>
 
-            <NavLink to="login">
-                <h4>Account Login</h4>
+            <NavLink to="signup">
+                <h4>Sign Up</h4>
             </NavLink>
             </div>
                
