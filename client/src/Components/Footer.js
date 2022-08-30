@@ -17,8 +17,7 @@ function Footer(){
         
         <h5 class="text-uppercase font-weight-bold">Footer text 1</h5>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Expedita sapiente sint, nulla, nihil
-          repudiandae commodi voluptatibus corrupti animi sequi aliquid magnam debitis, maxime quam recusandae
-          harum esse fugiat. Itaque, culpa?</p>
+    </p>
 
       </div>
       
@@ -31,8 +30,7 @@ function Footer(){
         
         <h5 class="text-uppercase font-weight-bold">Footer text 2</h5>
         <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Optio deserunt fuga perferendis modi earum
-          commodi aperiam temporibus quod nulla nesciunt aliquid debitis ullam omnis quos ipsam, aspernatur id
-          excepturi hic.</p>
+        </p>
 
       </div>
      

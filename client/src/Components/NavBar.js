@@ -40,8 +40,9 @@ function NavigationBar() {
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="/landingpage">Home <span class="sr-only">(current)</span></a>
                 <a class="nav-item nav-link" href="/vans">Search Vans</a>
+                <a class="nav-item nav-link" href="/newregistration">New Listing</a>
                 <a class="nav-item nav-link" href="/contactus">Contact Us</a>
-                <a class="nav-item nav-link" href="login">Account Login</a>
+                {/* <a class="nav-item nav-link" href="login">Account Login</a> */}
                 <a class="nav-item nav-link" href="signup">Sign Up</a>
             </div>
             </div>

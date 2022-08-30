@@ -41,7 +41,14 @@ function App() {
   const updateUser = (user) => setCurrentUser(user)
   
   return (
+    
     <div>
+
+      <button onClick={ console.log('hello') }>Log In</button>
+      <button onClick={ console.log('hello') }>Log Out</button>
+
+      <br></br>
+      <br></br>
      
      <Route path = '/'>
         <Home/>
