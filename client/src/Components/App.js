@@ -23,11 +23,21 @@ function App() {
       .then(res => res.json())
       .then(data => setCar(data))
   }
-
-  console.log(allCars)
-
   useEffect(fetchCar, [])
 
+
+  const userLogin = () => {
+    fetch ( "http://localhost:4003/login",
+      {
+      method: "POST",
+      headers: {"Content-Type" : "application/json"   },
+      body: JSON.stringify() 
+
+      })
+      .then(r => r.json())
+      .then (console.log("running post to LOGIN"))
+  }
+  
   const goGetNewCar = (carFromForm) => {
     setCar(  [ carFromForm , ...allCars ]  )
     fetch( "http://localhost:4003/vans" , {
@@ -38,14 +48,37 @@ function App() {
       .then( response => response.json() )
       .then( console.log )
   }
-  const updateUser = (user) => setCurrentUser(user)
+
   
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleLoginSubmit = (synthEvent) => {
+    synthEvent.preventDefault()
+    console.log('sam da bst')
+  }
+
+  const handleUsername = (e) => {
+    setUsername(e.target.value)
+  }
+
+  const handlePassword = (e) => {
+    setPassword(e.target.value)
+  }
+
   return (
     
     <div>
-
-      <button onClick={ console.log('hello') }>Log In</button>
+      
       <button onClick={ console.log('hello') }>Log Out</button>
+
+      <form onSubmit = {handleLoginSubmit}>
+        <input onChange = {handleUsername} type = "username"/>
+        <input onChange = {handlePassword} type = "password"/>
+        <input type = "submit"/>
+      </form>
+
+      {/* {loggedInUser? <> <h2>Welcome {loggedInUser.name}!</h2></>} */}
 
       <br></br>
       <br></br>
