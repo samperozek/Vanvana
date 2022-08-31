@@ -52,6 +52,7 @@ function App() {
   
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+  const [userToLogin, setUserInfo] = useState({username: "", password: ""})
 
   const handleLoginSubmit = (synthEvent) => {
     synthEvent.preventDefault()
@@ -66,6 +67,10 @@ function App() {
     setPassword(e.target.value)
   }
 
+  const handleUserInfoChange = (e) => {
+    setUserInfo({...use})
+  }
+
   return (
     
     <div>
@@ -73,8 +78,8 @@ function App() {
       <button onClick={ console.log('hello') }>Log Out</button>
 
       <form onSubmit = {handleLoginSubmit}>
-        <input onChange = {handleUsername} type = "username"/>
-        <input onChange = {handlePassword} type = "password"/>
+        <input onChange = {handleUsername} name = "username"/>
+        <input onChange = {handlePassword} type = "password" name = "password"/>
         <input type = "submit"/>
       </form>
 
