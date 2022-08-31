@@ -59,13 +59,11 @@ function App() {
     console.log('sam da bst')
   }
 
-  const handleUsername = (e) => {
-    setUsername(e.target.value)
+  const handleUserLogin =( e )=>{
+    setUserInfo(  { ...userToLogin , [e.target.name]: e.target.value }  )
   }
 
-  const handlePassword = (e) => {
-    setPassword(e.target.value)
-  }
+
 
   const handleUserInfoChange = (e) => {
     setUserInfo({...use})
@@ -78,8 +76,8 @@ function App() {
       <button onClick={ console.log('hello') }>Log Out</button>
 
       <form onSubmit = {handleLoginSubmit}>
-        <input onChange = {handleUsername} name = "username"/>
-        <input onChange = {handlePassword} type = "password" name = "password"/>
+        <input onChange = {handleUserLogin} name = "username"/>
+        <input onChange = {handleUserLogin} type = "password" name = "password"/>
         <input type = "submit"/>
       </form>
 
