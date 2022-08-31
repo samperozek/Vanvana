@@ -72,8 +72,11 @@ function App() {
     
     <div>
       
-      { loggedInUser? <h2>Welcome {loggedInUser.username}!</h2> : <h2>Welcome!</h2>} 
-      <button onClick = {handleLogout}>Log Out</button>
+      { loggedInUser? 
+      (<><h2>Welcome {loggedInUser.username}!</h2> 
+      <button onClick = {handleLogout}>Log Out</button> </>)
+      : <h2>Please Login</h2>} 
+      
 
       <form onSubmit = {handleLoginSubmit}>
         <input onChange = {handleUserLogin} name = "username"/>
