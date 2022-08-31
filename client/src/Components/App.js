@@ -12,14 +12,21 @@ import Login from './Login';
 
 function App() {
 
+  const [userToLogin, setUserInfo] = useState({username: "", password: ""})
+  const [loggedInUser, setLoggedInUser] = useState(null)
   const [allCars, setCar] = useState([])
 
+  useEffect(()=>{
+    fetch("/userInSession")
+    .then(r => r.json())
+    .then(userAlreadyLoggedIn => {setLoggedInUser(userAlreadyLoggedIn)})
+  }, [])
 
   const fetchCar = () => {
     fetch("/vans")
       .then(res => res.json())
       .then(data => setCar(data))
-  }
+  } 
   useEffect(fetchCar, [])
 
   const goGetNewCar = (carFromForm) => {
@@ -30,12 +37,11 @@ function App() {
         body: JSON.stringify( carFromForm )
       } )
       .then( response => response.json() )
-      // .then( console.log )
+
   }
 
   
-  const [userToLogin, setUserInfo] = useState({username: "", password: ""})
-  const [loggedInUser, setLoggedInUser] = useState(null)
+  
 
   const handleLoginSubmit = (synthEvent) => {
     synthEvent.preventDefault()
@@ -48,7 +54,14 @@ function App() {
       })
       .then(r => r.json())
       .then(user => { setLoggedInUser(user) })
-      .then(console.log("loggedInUser:", loggedInUser))
+    
+  }
+
+  const handleLogout =()=>{
+
+    fetch(  "/logout" , { method: "DELETE" }  )
+    .then( r => r.json() )
+    .then( deleteResponse =>{setLoggedInUser( null )})
   }
 
   const handleUserLogin =( e )=>{
@@ -60,15 +73,13 @@ function App() {
     <div>
       
       { loggedInUser? <h2>Welcome {loggedInUser.username}!</h2> : <h2>Welcome!</h2>} 
-      <button>Log Out</button>
+      <button onClick = {handleLogout}>Log Out</button>
 
       <form onSubmit = {handleLoginSubmit}>
         <input onChange = {handleUserLogin} name = "username"/>
         <input onChange = {handleUserLogin} type = "password" name = "password"/>
         <input type = "submit"/>
       </form>
-
-      {/* {loggedInUser? <> <h2>Welcome {loggedInUser.name}!</h2></>} */}
 
       <br></br>
       <br></br>
