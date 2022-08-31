@@ -10,13 +10,10 @@ import Home from './Home';
 import LandingPage from './LandingPage';
 import Login from './Login';
 
-
-
-
 function App() {
 
   const [allCars, setCar] = useState([])
-  const [currentUser, setCurrentUser] = useState(false)
+
 
   const fetchCar = () => {
     fetch("http://localhost:4003/vans")
@@ -25,19 +22,6 @@ function App() {
   }
   useEffect(fetchCar, [])
 
-
-  const userLogin = () => {
-    fetch ( "http://localhost:4003/login",
-      {
-      method: "POST",
-      headers: {"Content-Type" : "application/json"   },
-      body: JSON.stringify() 
-
-      })
-      .then(r => r.json())
-      .then (console.log("running post to LOGIN"))
-  }
-  
   const goGetNewCar = (carFromForm) => {
     setCar(  [ carFromForm , ...allCars ]  )
     fetch( "http://localhost:4003/vans" , {
@@ -46,34 +30,36 @@ function App() {
         body: JSON.stringify( carFromForm )
       } )
       .then( response => response.json() )
-      .then( console.log )
+      // .then( console.log )
   }
 
   
-  const [username, setUsername] = useState("")
-  const [password, setPassword] = useState("")
   const [userToLogin, setUserInfo] = useState({username: "", password: ""})
+  const [loggedInUser, setLoggedInUser] = useState(null)
 
   const handleLoginSubmit = (synthEvent) => {
     synthEvent.preventDefault()
-    console.log('sam da bst')
+    fetch ( "http://localhost:4003/login",
+      {
+      method: "POST",
+      headers: {"Content-Type" : "application/json"   },
+      body: JSON.stringify(userToLogin) 
+
+      })
+      .then(r => r.json())
+      .then(user => { setLoggedInUser(user) })
   }
 
   const handleUserLogin =( e )=>{
     setUserInfo(  { ...userToLogin , [e.target.name]: e.target.value }  )
   }
 
-
-
-  const handleUserInfoChange = (e) => {
-    setUserInfo({...use})
-  }
-
   return (
     
     <div>
       
-      <button onClick={ console.log('hello') }>Log Out</button>
+      { loggedInUser? <h2>Welcome {loggedInUser.name}!</h2> : <h2>Welcome!</h2>} 
+      <button>Log Out</button>
 
       <form onSubmit = {handleLoginSubmit}>
         <input onChange = {handleUserLogin} name = "username"/>
