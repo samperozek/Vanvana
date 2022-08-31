@@ -1,3 +1,7 @@
+Dealer.destroy_all
+User.destroy_all
+Van.destroy_all
+
 puts "🏕 Seeding dealers..."
 dealer1 = Dealer.create(name: 'Crazy Vans R Us')
 dealer2 = Dealer.create(name: 'Lizzie')
