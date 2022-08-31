@@ -1,8 +1,9 @@
 class SessionController < ApplicationController
 
     def create
+
         user_to_find_to_login = User.find_by( username: params[:username] )
-  
+        
         if user_to_find_to_login  #Now We Want to Verify their Password
             if user_to_find_to_login.authenticate( params[:password] )
                 session[:user_id] = user_to_find_to_login.id
@@ -15,10 +16,14 @@ class SessionController < ApplicationController
             render json: { error: "Username OR Password Don't Match" }
             # render json: { error: "No Username Matches / Username Doesn't Exists" }
         end
+        
     end
   
     def destroy
-      session.delete( :user_id )
+ 
+        
+        
+        session.delete( :user_id )
       render json: {}
     end
     

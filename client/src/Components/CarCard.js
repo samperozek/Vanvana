@@ -1,7 +1,7 @@
 import React from "react";
 
 function CarCard({carToRender}) {
-  console.log("carToRender:", carToRender)
+  
   return (
     <li className="cards__item">
       <div className="card">

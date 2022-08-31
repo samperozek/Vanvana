@@ -16,7 +16,7 @@ function App() {
 
 
   const fetchCar = () => {
-    fetch("http://localhost:4003/vans")
+    fetch("/vans")
       .then(res => res.json())
       .then(data => setCar(data))
   }
@@ -24,7 +24,7 @@ function App() {
 
   const goGetNewCar = (carFromForm) => {
     setCar(  [ carFromForm , ...allCars ]  )
-    fetch( "http://localhost:4003/vans" , {
+    fetch( "/vans" , {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify( carFromForm )
@@ -39,7 +39,7 @@ function App() {
 
   const handleLoginSubmit = (synthEvent) => {
     synthEvent.preventDefault()
-    fetch ( "http://localhost:4003/login",
+    fetch ( "/login",
       {
       method: "POST",
       headers: {"Content-Type" : "application/json"   },
@@ -48,6 +48,7 @@ function App() {
       })
       .then(r => r.json())
       .then(user => { setLoggedInUser(user) })
+      .then(console.log("loggedInUser:", loggedInUser))
   }
 
   const handleUserLogin =( e )=>{
@@ -58,7 +59,7 @@ function App() {
     
     <div>
       
-      { loggedInUser? <h2>Welcome {loggedInUser.name}!</h2> : <h2>Welcome!</h2>} 
+      { loggedInUser? <h2>Welcome {loggedInUser.username}!</h2> : <h2>Welcome!</h2>} 
       <button>Log Out</button>
 
       <form onSubmit = {handleLoginSubmit}>
