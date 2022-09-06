@@ -30,24 +30,58 @@ function NavigationBar() {
                 <h4>Sign Up</h4>
             </NavLink>
             </div> */} 
-
-            <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+            {/* <div class = "navMaster">
+            <nav>
             <a class="navbar-brand" href="#">Vanvana</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-                <a class="nav-item nav-link" href="/landingpage">Home <span class="sr-only">(current)</span></a>
+                <li></li><a class="nav-item nav-link" href="/landingpage">Home</a>
                 <a class="nav-item nav-link" href="/vans">Search Vans</a>
                 <a class="nav-item nav-link" href="/newregistration">New Listing</a>
                 <a class="nav-item nav-link" href="/contactus">Contact Us</a>
-                {/* <a class="nav-item nav-link" href="login">Account Login</a> */}
+                <a class="nav-item nav-link" href="login">Account Login</a> 
                 <a class="nav-item nav-link" href="signup">Sign Up</a>
-            </div>
-            </div>
+                
+                <div class = "nav_login">
+                    <form action={console.log("Hi")}>
+                        <input type="text" placeholder="Username" name="username"/>
+                        <input type="text" placeholder="Password" name="psw"/>
+                        <button type="submit">Login</button>
+                    </form>
+                </div>
+            </div> 
             </nav>
-               
+            </div> */}
+
+            <div class="navMaster">
+                <ul>
+                    <li><a class="nav-item nav-link" href="/landingpage">Home</a></li>
+                    <li><a class="nav-item nav-link" href="/vans">Search Vans</a></li>
+                    <li><a class="nav-item nav-link" href="/newregistration">New Listing</a></li>
+                    <li><a class="nav-item nav-link" href="/contactus">Contact Us</a></li>
+                    
+                        <div class = "nav_login">
+                            <form action={console.log("Hi")}>
+                                <input type="text" placeholder="Username" name="username"/>
+                                <input type="text" placeholder="Password" name="psw"/>
+                                <button type="submit">Login</button>
+                            </form>
+                        </div>
+                    
+                </ul>
+            </div>
+
+            {/* <div class="topnav">
+            <a class="active" href="#home">Home</a>
+            <a href="#about">About</a>
+            <a href="#contact">Contact</a>
+            <div class="login-container">
+                <form action={console.log("Hi")}>
+                <input type="text" placeholder="Username" name="username"/>
+                <input type="text" placeholder="Password" name="psw"/>
+                <button type="submit">Login</button>
+                </form>
+            </div>
+            </div>    */}
     
     </>
         
