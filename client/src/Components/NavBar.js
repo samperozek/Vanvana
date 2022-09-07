@@ -1,5 +1,5 @@
 
-import React, {useState} from "react"
+import React, {useState, useEffect} from "react"
 import { NavLink } from "react-router-dom"
 
 
@@ -9,11 +9,23 @@ function NavigationBar({handleLoginSubmit, handleLogout}) {
     const [password, setPassword] = useState("")
     const [userLoggedIn, setUserLoggedIn] = useState("")
 
+    useEffect(()=>{
+        fetch("/userInSession")
+        .then(r => r.json())
+        .then(userAlreadyLoggedIn => {setUserLoggedIn(userAlreadyLoggedIn)})
+      }, [])
+
     const handleLogin = (synthEvent) => {
         synthEvent.preventDefault()
         let newUser = {username: username, password: password}
         handleLoginSubmit(newUser)
         setUserLoggedIn(newUser)
+    }
+
+    const logout = (e) => {
+        fetch(  "/logout" , { method: "DELETE" }  )
+    .then( r => r.json() )
+    .then( deleteResponse =>{setUserLoggedIn( null )})
     }
 
     return(<>
@@ -25,9 +37,13 @@ function NavigationBar({handleLoginSubmit, handleLogout}) {
                     <li><a class="nav-item nav-link" href="/contactus">Contact Us</a></li>
                     
                         <div class = "nav_login">
+                            {userLoggedIn?
+                                    <><h2>Welcome {userLoggedIn.username}!</h2></>
+                                    : <></>}
                             <form onSubmit = {handleLogin}>
 
                                 <input 
+                                className="navInput"
                                 type="text" 
                                 placeholder="Username" 
                                 name="username"
@@ -38,6 +54,7 @@ function NavigationBar({handleLoginSubmit, handleLogout}) {
                                 />
 
                                 <input 
+                                className="navInput"
                                 type="password" 
                                 placeholder="Password" 
                                 name="password"
@@ -48,11 +65,9 @@ function NavigationBar({handleLoginSubmit, handleLogout}) {
                                 />
                                
                                 {userLoggedIn?
-                                (<><h2>Welcome {userLoggedIn.username}!</h2>
-                                <button onClick = {handleLogout}>Logout</button></>)
+                                <button onClick = {logout}>Logout</button>
                                 : <button>Login</button>}
 
-                                
                             </form>
                         </div>
                     

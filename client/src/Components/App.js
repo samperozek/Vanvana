@@ -42,8 +42,8 @@ function App() {
 
   }
 
-  const handleLoginSubmit = (synthEvent) => {
-    synthEvent.preventDefault()
+  const handleLoginSubmit = (userFromForm) => {
+    setUserInfo(userFromForm)
     fetch ( "/login",
       {
       method: "POST",
@@ -74,7 +74,7 @@ function App() {
     
     <div>
       <NavBar handleLoginSubmit = {handleLoginSubmit} handleLogout = {handleLogout}/>
-      { loggedInUser? 
+      {/* { loggedInUser? 
       (<><h2>Welcome {loggedInUser.username}!</h2> 
       <button onClick = {handleLogout}>Log Out</button> </>)
       : <h2>Please Login</h2>} 
@@ -87,10 +87,10 @@ function App() {
       </form>
 
       <br></br>
-      <br></br>
+      <br></br> */}
      
      <Route path = '/'>
-        
+        <Home/>
       </Route>
 
       <Route path = "/landingpage">
