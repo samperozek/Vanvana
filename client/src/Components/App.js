@@ -39,10 +39,7 @@ function App() {
       .then( response => response.json() )
 
   }
-
   
-  
-
   const handleLoginSubmit = (synthEvent) => {
     synthEvent.preventDefault()
     fetch ( "/login",
@@ -69,7 +66,7 @@ function App() {
   }
 
 
-  
+
   
   return (
     

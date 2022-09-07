@@ -90,6 +90,8 @@ input[type=button], input[type=submit], input[type=reset] {
 /* Style the NavBar */
 
 .navMaster ul {
+  position: sticky;
+  top: 0;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -126,8 +128,12 @@ li a:hover:not(.active) {
   float: right;
 }
 
+.navMaster .nav_login input {
+  margin-left: 10px;
+}
+
 .navMaster .nav_login button {
-  padding: 10px 10px 10px 10px;
+  margin-left: 20px;
   width: 100px;
 }
 
