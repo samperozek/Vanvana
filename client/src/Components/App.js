@@ -9,6 +9,8 @@ import ContactUs from './ContactUs';
 import Home from './Home';
 import LandingPage from './LandingPage';
 import Login from './Login';
+import NavBar from './NavBar'
+import Footer from './Footer';
 
 function App() {
 
@@ -39,7 +41,7 @@ function App() {
       .then( response => response.json() )
 
   }
-  
+
   const handleLoginSubmit = (synthEvent) => {
     synthEvent.preventDefault()
     fetch ( "/login",
@@ -71,7 +73,7 @@ function App() {
   return (
     
     <div>
-      
+      <NavBar handleLoginSubmit = {handleLoginSubmit} handleLogout = {handleLogout}/>
       { loggedInUser? 
       (<><h2>Welcome {loggedInUser.username}!</h2> 
       <button onClick = {handleLogout}>Log Out</button> </>)
@@ -88,7 +90,7 @@ function App() {
       <br></br>
      
      <Route path = '/'>
-        <Home/>
+        
       </Route>
 
       <Route path = "/landingpage">
@@ -110,6 +112,8 @@ function App() {
       <Route path='/login'>
         <Login/>
       </Route>
+     
+    <Footer/>
      
     </div>
 
