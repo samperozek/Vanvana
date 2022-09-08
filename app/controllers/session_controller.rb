@@ -13,6 +13,8 @@ class SessionController < ApplicationController
         else
             render json: { error: "Username OR Password Don't Match" }
         end
+        
+        
     end
   
     def destroy  

@@ -1,6 +1,6 @@
 
 import './App.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useSyncExternalStore } from 'react';
 import {Route} from 'react-router-dom';
 
 import CarList from "./CarList";
@@ -11,17 +11,21 @@ import LandingPage from './LandingPage';
 import Login from './Login';
 import NavBar from './NavBar'
 import Footer from './Footer';
+import Signup from './Signup';
+import Header from './Header';
 
 function App() {
 
   const [userToLogin, setUserInfo] = useState({username: "", password: ""})
   const [loggedInUser, setLoggedInUser] = useState(null)
   const [allCars, setCar] = useState([])
+  const [user, setUsers] = useState([])
 
   useEffect(()=>{
     fetch("/userInSession")
     .then(r => r.json())
     .then(userAlreadyLoggedIn => {setLoggedInUser(userAlreadyLoggedIn)})
+    .then(console.log(loggedInUser))
   }, [])
 
   const fetchCar = () => {
@@ -30,6 +34,13 @@ function App() {
       .then(data => setCar(data))
   } 
   useEffect(fetchCar, [])
+
+  const fetchUsers = () => {
+    fetch("/users")
+      .then(res => res.json())
+      .then(data => setUsers(data))
+  } 
+  useEffect(fetchUsers, [])
 
   const goGetNewCar = (carFromForm) => {
     setCar(  [ carFromForm , ...allCars ]  )
@@ -43,6 +54,7 @@ function App() {
   }
 
   const handleLoginSubmit = (userFromForm) => {
+   
     setUserInfo(userFromForm)
     fetch ( "/login",
       {
@@ -52,28 +64,43 @@ function App() {
 
       })
       .then(r => r.json())
-      .then(user => { setLoggedInUser(user) })
+      .then(user => { 
+        console.log(user)
+        setLoggedInUser(user) })
+      .then(console.log("made it through the login fetch"))
     
   }
 
-  const handleLogout =()=>{
 
+  const handleLogout =()=>{
+    console.log("we made it to logout")
     fetch(  "/logout" , { method: "DELETE" }  )
     .then( r => r.json() )
     .then( deleteResponse =>{setLoggedInUser( null )})
+    .then(console.log(loggedInUser))
   }
 
   const handleUserLogin =( e )=>{
     setUserInfo(  { ...userToLogin , [e.target.name]: e.target.value }  )
   }
 
+  const createNewUser = (userFromForm) => {
+    setUsers(  [...user , userFromForm ]  )
+    fetch( "/users" , {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify( userFromForm )
+      } )
+      .then( response => response.json() )
+  }
 
 
   
   return (
     
     <div>
-      <NavBar handleLoginSubmit = {handleLoginSubmit} handleLogout = {handleLogout}/>
+      <Header/>
+      <NavBar loggedInUser = {loggedInUser} handleLoginSubmit = {handleLoginSubmit} handleLogout = {handleLogout}/>
       {/* { loggedInUser? 
       (<><h2>Welcome {loggedInUser.username}!</h2> 
       <button onClick = {handleLogout}>Log Out</button> </>)
@@ -111,6 +138,10 @@ function App() {
 
       <Route path='/login'>
         <Login/>
+      </Route>
+
+      <Route path="/signup">
+        <Signup createNewUser={createNewUser}/>
       </Route>
      
     <Footer/>
