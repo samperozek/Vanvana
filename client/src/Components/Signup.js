@@ -62,7 +62,7 @@ function Signup ({createNewUser}) {
                 type="submit"
               name="submit"
               value="Submit Posting"
-              className="sign_up_button"
+              className="sign_up_button "
             />
     
           </form>
