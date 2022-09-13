@@ -1,7 +1,8 @@
 
-import React, {useState, useEffect} from "react"
-import { NavLink } from "react-router-dom"
+import React, { useState } from "react"
+import { useHistory } from "react-router-dom"
 
+import LandingPage from "./LandingPage"
 
 function NavigationBar({handleLoginSubmit, handleLogout, loggedInUser}) {
 
@@ -9,33 +10,31 @@ function NavigationBar({handleLoginSubmit, handleLogout, loggedInUser}) {
     const [password, setPassword] = useState("")
     const [loggedInUserInfo, setLoggedInUserInfo] = useState(null)
 
-    // useEffect(()=>{
-    //     fetch("/userInSession")
-    //     .then(r => r.json())
-    //     .then(userAlreadyLoggedIn => {setLoggedInUserInfo(userAlreadyLoggedIn)})
-    //   }, [])
+    const history = useHistory()
 
     const handleLogin = (synthEvent) => {
         synthEvent.preventDefault()
         let newUser = {username: username, password: password}
+        console.log("made it through the navbar handleLogin", newUser)
         handleLoginSubmit(newUser)
     }
 
     const handleLogoutNavBar = (e) =>{
         e.preventDefault()
         handleLogout()
+        history.push('/LandingPage')
     }
 
 
     return(<>
             <div class="navMaster">
                 <ul>
-                    <li><a class="nav-item nav-link" href="/landingpage">Home</a></li>
+                    <li><a class="nav-item nav-link" href="/LandingPage">Home</a></li>
                     <li><a class="nav-item nav-link" href="/vans">Browse Vans</a></li>
-                    <li><a class="nav-item nav-link" href="/newregistration">New Listing</a></li>
-                    <li><a class="nav-item nav-link" href="/contactus">Contact Us</a></li>
-                    <li><a class="nav-item nav-link" href="/signup">Sign Up</a></li>
-                    
+                    <li><a class="nav-item nav-link" href="/NewRegistration">New Listing</a></li>
+                    <li><a class="nav-item nav-link" href="/ContactUs">Contact Us</a></li>
+                    <li><a class="nav-item nav-link" href="/SignUp">Sign Up</a></li>
+                    <li><a class="nav-item nav-link" href="/MyAccount">My Account</a></li>
                         <div class = "nav_login">
                             {loggedInUser?
                                     <><h2>Welcome {loggedInUser.username}!</h2></>

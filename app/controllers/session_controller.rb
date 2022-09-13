@@ -24,6 +24,7 @@ class SessionController < ApplicationController
     
     def get_logged_in_user
         user_already_loggedin = User.find_by( id: session[:user_id] )
+        
         render json: user_already_loggedin        
     end
 

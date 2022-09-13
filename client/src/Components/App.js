@@ -1,6 +1,7 @@
 
 import './App.css';
-import { useEffect, useState, useSyncExternalStore } from 'react';
+import React from 'react';
+import { useEffect, useState, forceUpdate, useSyncExternalStore } from 'react';
 import {Route} from 'react-router-dom';
 
 import CarList from "./CarList";
@@ -8,24 +9,27 @@ import NewCarForm from "./NewCarForm";
 import ContactUs from './ContactUs';
 import Home from './Home';
 import LandingPage from './LandingPage';
-import Login from './Login';
 import NavBar from './NavBar'
 import Footer from './Footer';
 import Signup from './Signup';
 import Header from './Header';
+import MyAccount from './MyAccount';
 
 function App() {
 
-  const [userToLogin, setUserInfo] = useState({username: "", password: ""})
+  const [userToLogin, setUserInfo] = useState(null)
   const [loggedInUser, setLoggedInUser] = useState(null)
+  console.log("LoggedInUser from useEffect", loggedInUser)
   const [allCars, setCar] = useState([])
   const [user, setUsers] = useState([])
+
+  // const rerender = () => {this.forceUpdate()}
 
   useEffect(()=>{
     fetch("/userInSession")
     .then(r => r.json())
-    .then(userAlreadyLoggedIn => {setLoggedInUser(userAlreadyLoggedIn)})
-    .then(console.log(loggedInUser))
+    .then(userAlreadyLoggedIn => {
+      setLoggedInUser(userAlreadyLoggedIn)})
   }, [])
 
   const fetchCar = () => {
@@ -54,22 +58,27 @@ function App() {
   }
 
   const handleLoginSubmit = (userFromForm) => {
-   
+    console.log("made it to the beginning of Login Submit", userFromForm)
     setUserInfo(userFromForm)
+    // rerender()
+    //useEffect(()=>{setUserInfo(userFromForm)}, [userFromForm])
+    console.log("check that setUserInfo was assigned properly", userToLogin)
     fetch ( "/login",
       {
       method: "POST",
       headers: {"Content-Type" : "application/json"   },
-      body: JSON.stringify(userToLogin) 
+      body: JSON.stringify(userFromForm) 
 
       })
       .then(r => r.json())
       .then(user => { 
-        console.log(user)
+        console.log("user from inside the loginsubmit",user)
         setLoggedInUser(user) })
-      .then(console.log("made it through the login fetch"))
+      .then(console.log("after login fetch, check user info, loggedInUser", loggedInUser))
     
   }
+
+  // useEffect(handleLoginSubmit,[])
 
 
   const handleLogout =()=>{
@@ -80,9 +89,9 @@ function App() {
     .then(console.log(loggedInUser))
   }
 
-  const handleUserLogin =( e )=>{
-    setUserInfo(  { ...userToLogin , [e.target.name]: e.target.value }  )
-  }
+  // const handleUserLogin =( e )=>{
+  //   setUserInfo(  { ...userToLogin , [e.target.name]: e.target.value }  )
+  // }
 
   const createNewUser = (userFromForm) => {
     setUsers(  [...user , userFromForm ]  )
@@ -136,8 +145,8 @@ function App() {
         <ContactUs/>
       </Route>
 
-      <Route path='/login'>
-        <Login/>
+      <Route path='/myaccount'>
+        <MyAccount loggedInUser = {loggedInUser}/>
       </Route>
 
       <Route path="/signup">

@@ -10,3 +10,4 @@ Rails.application.routes.draw do
   get    "/userInSession", to:"session#get_logged_in_user" 
   delete "/logout", to:"session#destroy"
 end
+ 
