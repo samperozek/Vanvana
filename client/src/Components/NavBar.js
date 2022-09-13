@@ -32,7 +32,7 @@ function NavigationBar({handleLoginSubmit, handleLogout, loggedInUser}) {
                     <li><a class="nav-item nav-link" href="/LandingPage">Home</a></li>
                     <li><a class="nav-item nav-link" href="/vans">Browse Vans</a></li>
                     <li><a class="nav-item nav-link" href="/NewRegistration">New Listing</a></li>
-                    <li><a class="nav-item nav-link" href="/ContactUs">Contact Us</a></li>
+                    {/* <li><a class="nav-item nav-link" href="/ContactUs">Contact Us</a></li> */}
                     <li><a class="nav-item nav-link" href="/SignUp">Sign Up</a></li>
                     <li><a class="nav-item nav-link" href="/MyAccount">My Account</a></li>
                         <div class = "nav_login">

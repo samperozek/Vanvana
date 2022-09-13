@@ -19,7 +19,6 @@ function App() {
 
   const [userToLogin, setUserInfo] = useState(null)
   const [loggedInUser, setLoggedInUser] = useState(null)
-  console.log("LoggedInUser from useEffect", loggedInUser)
   const [allCars, setCar] = useState([])
   const [user, setUsers] = useState([])
 

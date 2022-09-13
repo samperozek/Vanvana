@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-
+import { useHistory } from "react-router-dom"
 
 function NewCarForm ({goGetNewCar}) {
 
@@ -11,6 +11,7 @@ function NewCarForm ({goGetNewCar}) {
     const [ buyer, setBuyer ] = useState("")
     const [ owner, setOwner ] = useState("")
   
+    const history = useHistory()
 
     return (
         <div >
@@ -29,15 +30,16 @@ function NewCarForm ({goGetNewCar}) {
                   model: model,
                   price: price,
                   imageURL: inputFieldForNewCarImageValue,
-                  buyer_id: buyer,
-                  owner_id: owner
+                  user_id: buyer,
+                  dealer_id: owner
     
                 }
                 goGetNewCar(newCar)
+                history.push('/vans')
                } 
             } >
-    
-            <h3 className = "add-car-form">New Van Listing</h3>
+              <br></br>
+            <h3 className = "add-car-form">List New Van for Sale</h3>
             
             <div className="formInputs">
             <input
@@ -93,7 +95,7 @@ function NewCarForm ({goGetNewCar}) {
             <input
               type="text"
               name="owner_id"
-              placeholder="Enter the owner_id"
+              placeholder="Enter the Owner's ID"
               className="input-text"
     
                 value={ owner }
@@ -102,8 +104,8 @@ function NewCarForm ({goGetNewCar}) {
             /><br />
             <input
               type="text"
-              name="buyer_id"
-              placeholder="Enter the buyer_id"
+              name="dealer_id"
+              placeholder="Enter the Dealer's ID"
               className="input-text"
     
                 value={ buyer }

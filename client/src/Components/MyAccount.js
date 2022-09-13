@@ -1,41 +1,41 @@
 
 import React, { useEffect , useState } from "react";
 
-import CarCard from "./CarCard";
+import CarCardAccount from "./CarCardAccount";
 
 
 
 function MyAccount ({loggedInUser}) {
 
     const [vansIn, setVans] = useState([]) 
-    console.log("Van State",vansIn)
+    const [lengthCounter, setLength] = useState()
+    
+    let vanCounter = () => {
+        setLength(vansIn.length)
+        console.log("LengthCounter:",lengthCounter)
+    }
 
     const fetchVans = () => {
-        console.log("loggedInUser from MyAccount Component:", loggedInUser)
         if (loggedInUser) {
         fetch(`/users/${loggedInUser.id}`)
           .then(res => res.json())
-          .then(data => setVans(data.vans))}
+          .then(data => setVans(data.vans))
+          .then(vanCounter())
+          }
       }
-    useEffect(fetchVans, [loggedInUser])
+      
+    useEffect(fetchVans, [loggedInUser , lengthCounter])
 
     return (
         <ul className="cards">
             {
-            //   console.log('vans from myaccount!:', vansIn)
               vansIn.map((eachVan)=>{
                 return(
-                <CarCard
+                <CarCardAccount
                     key = {eachVan.id}
-                    carToRender = {eachVan}/>)
+                    carToRender = {eachVan}
+                    vanCounter = {vanCounter}/>)
               })
-            //   vansIn.map((eachCar) => {
-                
-            //       <CarCard
-            //         key ={eachCar.id}
-            //         carToRender={eachCar}
-            //       /> }
-            //   )
             }
         </ul>
       
