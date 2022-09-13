@@ -1,6 +1,6 @@
 
 import React, {useState} from "react";
-
+import { useHistory } from "react-router-dom"
 
 function Signup ({createNewUser}) {
     const [ name, setName ] = useState("")
@@ -8,7 +8,7 @@ function Signup ({createNewUser}) {
     const [ username, setUsername ] = useState("")
     const [ password, setPassword ] = useState("")
     
-  
+    const history = useHistory()
 
     return (
         <div >
@@ -29,38 +29,19 @@ function Signup ({createNewUser}) {
     
                 }
                 createNewUser(newUserLogin)
-                console.log("newUserLogin", newUserLogin)
+                history.push("/vans")
                } 
             } >
             <br></br>    
             <h3 className = "add-car-form">Sign up today!</h3>
             
             <div className="formInputs">
-            {/* <input
-              type="text"
-              name="name"
-              placeholder="First and Last Name"
-              className="input-text"
-    
-                value={ name }
-                onChange={ ( synthEvent )=>{ setName( synthEvent.target.value ) } }
-    
-            /><br />
-            <input
-              type="text"
-              name="email"
-              placeholder="Enter your Email"
-              className="input-text"
-    
-                value={ email }
-                onChange={ ( synthEvent )=>{ setEmail( synthEvent.target.value ) } }
-    
-            /><br /> */}
             <input
               type="text"
               name="username"
               placeholder="Username"
-              className="input-text"
+              className="inputfield"
+             
     
                 value={ username }
                 onChange={ ( synthEvent )=>{ setUsername( synthEvent.target.value ) } }
@@ -70,18 +51,18 @@ function Signup ({createNewUser}) {
               type="password"
               name="password"
               placeholder="Password"
-              className="input-text"
+              className="inputfieldpassword"
+            
     
                 value={ password }
                 onChange={ ( synthEvent )=>{ setPassword( synthEvent.target.value ) } }
-        
             /><br />
             </div>
             <input
                 type="submit"
               name="submit"
               value="Submit Posting"
-              className="submit"
+              className="sign_up_button"
             />
     
           </form>

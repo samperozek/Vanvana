@@ -2,6 +2,22 @@
   text-align: center;
 }
 
+.formInputs{
+  text-align: center;
+  font-size: x-large;
+}
+
+.inputfieldpassword{
+  font-size: x-large;
+}
+
+.sign_up_button{
+  
+  position: absolute;
+  left: 45%;
+  right: 45%;
+}
+
 .navBar {
   display:flex;
   flex-direction: row; 
